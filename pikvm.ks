@@ -17,12 +17,12 @@ network  --hostname=pikvm-client --onboot=yes --noipv6
 firstboot --disable
 
 # Generated using Blivet version 3.3.0
-ignoredisk --only-use=sda
+ignoredisk --only-use=vda
 # Partition clearing information
 clearpart --all --initlabel
 # Disk partitioning information
-part btrfs.189 --fstype="btrfs" --ondisk=sda --grow --size=10000
-part /boot --fstype="ext4" --ondisk=sda --size=1024
+part btrfs.189 --fstype="btrfs" --ondisk=vda --grow --size=10000
+part /boot --fstype="ext4" --ondisk=vda --size=1024
 btrfs none --label=fedora btrfs.189
 btrfs / --subvol --name=root LABEL=fedora_root
 btrfs /home --subvol --name=home LABEL=fedora_home
@@ -34,7 +34,7 @@ timezone Europe/Prague
 rootpw weakpasswd
 
 #Create user
-user --homedir=/home/pikvm --name=pikvm --password=weakpassword --plaintext --gecos=PiKVM Tester
+user --homedir=/home/pikvm --name=pikvm --password=weakpassword --plaintext --gecos="PiKVM Tester"
 
 #Packages
 %packages
