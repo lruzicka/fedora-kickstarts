@@ -52,5 +52,5 @@ echo "autologin-session=fluxbox" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
 
 # Make chromium autostart on startup.
 %post
-sed -i 's/# idesk/chromium-browser fqe-pikvm.usersys.redhat.com --start-fullscreen/g' /home/pikvm/.fluxbox/startup
+sed -i 's/\# idesk/chromium-browser fqe-pikvm.usersys.redhat.com --start-fullscreen/g' /home/pikvm/.fluxbox/startup
 %end
