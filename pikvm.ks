@@ -30,7 +30,7 @@ firstboot --disable
 ignoredisk --only-use=vda
 autopart
 # Partition clearing information
-clearpart --none --initlabel
+clearpart --all --initlabel
 
 # System timezone
 timezone Europe/Prague
