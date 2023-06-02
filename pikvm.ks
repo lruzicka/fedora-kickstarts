@@ -42,8 +42,7 @@ user --homedir=/home/pikvm --name=pikvm --password=weakpassword --gecos="PiKVM T
 
 # Post-installation stuff
 # Creating an automated login for user pikvm.
-%post --nochroot
-cd /etc/lightdm/lightdm.conf.d/
+%post
 echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/pikvm.conf
 echo "autologin-user=pikvm" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
 echo "autologin-user-timeout=0" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
@@ -51,6 +50,9 @@ echo "autologin-session=fluxbox" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
 %end
 
 # Make chromium autostart on startup.
-%post --nochroot
-sed -i 's/# idesk/chromium-browser fqe-pikvm.usersys.redhat.com --start-fullscreen/g' /home/pikvm/.fluxbox/startup
+%post
+mkdir /home/pikvm/.fluxbox
+echo "#!/bin/sh" > /home/pikvm/.fluxbox/startup
+echo "chromium-browser fqe-pikvm.usersys.redhat.com --start-fullscreen &" >> /home/pikvm/.fluxbox/startup
+echo "exec fluxbox" >> /home/pikvm/.fluxbox/startup
 %end
