@@ -37,4 +37,4 @@ timezone Europe/Prague
 
 # Root password
 rootpw --plaintext weakpasswd
-user --homedir=/home/pikvm --name=pikvm --password=weakpassword --gecos="PiKVM Tester"
+user --homedir=/home/pikvm --name=pikvm --password=weakpassword --gecos="PiKVM Tester" --groups=wheel
