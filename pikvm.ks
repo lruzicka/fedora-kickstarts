@@ -21,6 +21,7 @@ url --url="https://mirror.karneval.cz/pub/linux/fedora/linux/releases/38/Everyth
 @Basic Desktop
 chromium
 fluxbox
+vim
 
 %end
 
@@ -36,5 +37,20 @@ clearpart --all --initlabel
 timezone Europe/Prague
 
 # Root password
-rootpw --plaintext weakpasswd
+rootpw --plaintext weakpassword
 user --homedir=/home/pikvm --name=pikvm --password=weakpassword --gecos="PiKVM Tester" --groups=wheel
+
+# Post-installation stuff
+# Creating an automated login for user pikvm.
+%post
+cd /etc/lightdm/lightdm.conf.d/
+echo "[Seat:*]" > /etc/lightdm/lightdm.conf.d/pikvm.conf
+echo "autologin-user=pikvm" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
+echo "autologin-user-timeout=0" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
+echo "autologin-session=fluxbox" >> /etc/lightdm/lightdm.conf.d/pikvm.conf
+%end
+
+# Make chromium autostart on startup.
+%post
+sed -i 's/# idesk/chromium-browser fqe-pikvm.usersys.redhat.com --start-fullscreen/g' /home/pikvm/.fluxbox/startup
+%end
